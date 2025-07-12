@@ -2,7 +2,7 @@ import Link from "next/link";
 import {buttonVariants} from "@/components/ui/button";
 import {prisma} from "@/app/utils/db";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import Image from "next/image";
+import {BlogPostCard} from "@/components/general/BlogPostCard";
 
 async function getData(userId: string) {
     const data = await prisma.blogPost.findMany({
@@ -39,9 +39,7 @@ export default async function DashboardRoute() {
                 <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"}>
                     {
                         data.map((post) => (
-                            <div key={post.id}>
-                                {post.title}
-                            </div>
+                            <BlogPostCard data={post} key={post.id} />
                         ))
                     }
                 </div>
